@@ -1,0 +1,2 @@
+export SSH_KEY=ssh_key
+export TF_VAR_db_password=password
