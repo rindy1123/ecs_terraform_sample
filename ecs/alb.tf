@@ -30,6 +30,11 @@ resource "aws_lb_target_group" "tg" {
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
   target_type = "ip"
+
+  health_check {
+    interval = 300
+    path     = "/ping"
+  }
 }
 
 // TODO: HTTPS

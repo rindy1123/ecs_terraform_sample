@@ -22,6 +22,11 @@ resource "aws_db_parameter_group" "go-app" {
     name  = "log_connections"
     value = "1"
   }
+
+  parameter {
+    name  = "rds.force_ssl"
+    value = "0"
+  }
 }
 
 resource "aws_db_instance" "go-app" {
