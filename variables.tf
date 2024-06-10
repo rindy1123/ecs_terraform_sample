@@ -13,39 +13,19 @@ variable "env" {
   description = "Environment"
 }
 
+variable "app_name" {
+  default     = "go-app"
+  description = "Application name"
+}
+
 variable "db_password" {
   description = "RDS root user password"
   type        = string
   sensitive   = true
 }
 
-variable "private-subnet-1-cidr-block" {
-  default = "10.0.1.0/24"
-  type = string
+locals {
+  private_subnets  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  public_subnets   = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+  database_subnets = ["10.0.7.0/24", "10.0.8.0/24"]
 }
-
-variable "private-subnet-2-cidr-block" {
-  default = "10.0.2.0/24"
-  type = string
-}
-
-variable "private-subnet-3-cidr-block" {
-  default = "10.0.3.0/24"
-  type = string
-}
-
-variable "public-subnet-1-cidr-block" {
-  default = "10.0.4.0/24"
-  type = string
-}
-
-variable "public-subnet-2-cidr-block" {
-  default = "10.0.5.0/24"
-  type = string
-}
-
-variable "public-subnet-3-cidr-block" {
-  default = "10.0.6.0/24"
-  type = string
-}
-

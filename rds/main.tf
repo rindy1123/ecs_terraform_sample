@@ -1,15 +1,6 @@
-resource "aws_db_subnet_group" "go-app" {
-  name       = "go-app"
-  subnet_ids = module.vpc.private_subnets
-
-  tags = {
-    Name = "Go App"
-  }
-}
-
 resource "aws_security_group" "rds" {
-  name   = "go-app_rds"
-  vpc_id = module.vpc.vpc_id
+  name   = "${var.app_name}-${var.env}-rds-sg"
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 5432
@@ -19,12 +10,12 @@ resource "aws_security_group" "rds" {
   }
 
   tags = {
-    Name = "go-app_rds"
+    Name = "${var.app_name}-${var.env}-rds"
   }
 }
 
 resource "aws_db_parameter_group" "go-app" {
-  name   = "go-app"
+  name   = "${var.app_name}-${var.env}-db-parameter-group"
   family = "postgres16"
 
   parameter {
@@ -34,14 +25,14 @@ resource "aws_db_parameter_group" "go-app" {
 }
 
 resource "aws_db_instance" "go-app" {
-  identifier             = "go-app"
+  identifier             = "${var.app_name}-${var.env}-rds"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
   engine_version         = "16.1"
   username               = "postgres"
   password               = var.db_password
-  db_subnet_group_name   = aws_db_subnet_group.go-app.name
+  db_subnet_group_name   = var.db_subnet_group_name
   vpc_security_group_ids = [aws_security_group.rds.id]
   parameter_group_name   = aws_db_parameter_group.go-app.name
   publicly_accessible    = false
