@@ -33,3 +33,12 @@ module "ecs" {
   public_subnets             = module.vpc.public_subnets
   private_subnets            = module.vpc.private_subnets
 }
+
+module "amplify" {
+  source = "./amplify"
+
+  env                        = var.env
+  app_name                   = var.app_name
+  ecs_endpoint               = module.ecs.endpoint
+  github_token               = var.github_token
+}

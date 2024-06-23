@@ -51,6 +51,10 @@ locals {
         {
           name = "GIN_MODE"
           valueFrom = "${local.secretsmanager_secret_arn}:GIN_MODE::"
+        },
+                {
+          name = "FRONT_ORIGIN"
+          valueFrom = "${local.secretsmanager_secret_arn}:FRONT_ORIGIN::"
         }
       ]
     }
