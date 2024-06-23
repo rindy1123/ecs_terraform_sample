@@ -83,5 +83,13 @@ resource "aws_ecs_service" "ecs_service" {
     container_port   = 8080
   }
 
-  depends_on = [aws_lb_listener.alb_listener]
+  depends_on = [aws_lb_listener.alb_listener, aws_cloudwatch_log_group.ecs_log_group]
+}
+
+resource "aws_cloudwatch_log_group" "ecs_log_group" {
+  name              = "/ecs/${var.app_name}-${var.env}"
+  retention_in_days = 7
+  lifecycle {
+    prevent_destroy = false
+  }
 }

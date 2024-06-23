@@ -16,8 +16,7 @@ locals {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group = "/ecs/go_app"
-          awslogs-create-group = "true"
+          awslogs-group = "/ecs/${var.app_name}-${var.env}"
           awslogs-region = "ap-northeast-1"
           awslogs-stream-prefix = "ecs"
         }
