@@ -1,9 +1,11 @@
-name: deployment
+name: validation
 
 on:
-  workflow_dispatch:
+  pull_request:
     branches:
-      - main
+      - "**"
+    paths:
+      - "**"
 
 env:
   SSH_KEY: ${{ secrets.SSH_KEY }}
@@ -33,9 +35,3 @@ jobs:
 
       - name: Terraform plan
         run: terraform plan
-
-      - name: Terraform apply
-        run: terraform apply -auto-approve
-
-      - name: Terraform destroy
-        run: terraform destroy -auto-approve
