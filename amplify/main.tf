@@ -2,7 +2,6 @@ resource "aws_amplify_app" "main" {
   name                 = "${var.app_name}-${var.env}-amplify"
   repository           = local.repository
   platform             = "WEB_COMPUTE"
-  # TODO: get token from github actions
   access_token         = var.github_token
   iam_service_role_arn = aws_iam_role.amplify_ssr_logging_role.arn
 

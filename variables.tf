@@ -1,13 +1,3 @@
-variable "region" {
-  default     = "ap-northeast-1"
-  description = "AWS region"
-}
-
-variable "profile" {
-  default     = "terraform"
-  description = "AWS profile"
-}
-
 variable "env" {
   default     = "prod"
   description = "Environment"

@@ -9,10 +9,7 @@ terraform {
   required_version = "~> 1.8.2"
 }
 
-provider "aws" {
-  region  = var.region
-  profile = var.profile
-}
+provider "aws" {}
 
 module "rds" {
   source                 = "./rds"
